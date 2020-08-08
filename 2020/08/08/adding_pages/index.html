@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="ha3uno - Github pages"/>
+        <meta property="og:title" content="ページの追加"/>
     
 
     <!--Open Graph Description-->
@@ -33,7 +33,7 @@
 
     <!--Type page-->
     
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content="article" />
     
 
     <!--Page Cover-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>ha3uno - Github pages</title>
+    <title>ページの追加 - ha3uno - Github pages</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -126,14 +126,14 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Wind blows since spring has come.</h1>
-            <p class="f4 fw3 pab-100px tc tc-m tl-ns">～春が来たりて風が吹く～</p>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">ページの追加</h1>
+            <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-08-08</p>
         </div>
     </div>
 
     <!-- Icon -->
     <div class="relative w-100 mw8 center white dn dn-m db-ns">
-        <i class="header-icon fa fa fa-magic"></i>
+        <i class="header-icon fa fa-file-text-o"></i>
     </div>
 </div>
 
@@ -141,61 +141,92 @@
 <div class="w-100 ph2 ph4-m ph5-l mv5 mv6-l">
     <div class="content">
         <div class="mw8 center">
-            
-                <a href="/2020/08/08/adding_pages/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2020-08-08</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">ページの追加<span>
+            <div class="cf">
+                <div class="fl w-100 w-70-l mw7 left fw3 lh-copy pr4-ns pr0-m post-content">
+                    <!-- Tags Vertical -->
+                    
+
+                    <!-- Main Post Content -->
+                    <h2 id="要約"><a href="#要約" class="headerlink" title="要約"></a>要約</h2><ul>
+<li>Hexoでは、/blog_name/source/以下にMarkdownファイルを置いてデプロイすると、静的HTMLに変換されてサーバ上にホスティングされる<ul>
+<li>Markdownファイルのファイル名がそのままHTMLのファイル名となる</li>
+<li>/blog_name/source/以下のディレクトリ構成がそのままサーバ上にホスティングされる<ul>
+<li>Github Pagesの場合、*/blog_name/source/some_path/some_dir/hoge.md* は <em>https://[owner名].github.io/some_path/some_dir/hoge.html</em> に配置される</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>一方、/blog_name/source/_posts/以下にMarkdownファイルを配置すると、ブログの記事として扱われる<ul>
+<li>URLのパスは、作成したMarkdownファイルのFront-matterブロックにおけるdateフィールドの値をベースに決まる</li>
+<li>URLの最終パスはMarkdownファイル名となり、静的HTMLはindex.htmlとして生成される<ul>
+<li>Markdownファイルのdateフィールドが date: 2020-08-08 13:32:50 の場合、<em>https://[owner名].github.io/2020/08/08/[Markdownファイル名]/index.html</em> としてホスティングされる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>詳細は<a target="_blank" rel="noopener" href="https://hexo.io/docs/commands">Hexoのドキュメント</a>を参照</li>
+</ul>
+<h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><p>下記手順によりMarkdownファイルを追加し、デプロイする</p>
+<ul>
+<li><p>ただのページを作成したい場合</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># page をつけることでMarkdownファイルの生成先を/blog_name/source/に指定する</span></span><br><span class="line">hexo new page -p [Markdownファイル名] <span class="string">&quot;ページタイトル&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例1</span></span><br><span class="line">hexo new page -p <span class="built_in">test</span> <span class="string">&quot;テスト&quot;</span></span><br><span class="line"></span><br><span class="line">※https://[owner名].github.io/test.html に静的HTMLが追加される</span><br><span class="line"></span><br><span class="line"><span class="comment"># 例2</span></span><br><span class="line">hexo new page -p some_path/<span class="built_in">test</span> <span class="string">&quot;テスト&quot;</span></span><br><span class="line"></span><br><span class="line">※https://[owner名].github.io/some_path/test.html に静的HTMLが追加される</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通常のブログ記事を作成したい場合</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># postは省略可</span></span><br><span class="line">hexo new post -p [Markdownファイル名] <span class="string">&quot;記事タイトル&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 例</span></span><br><span class="line">hexo new post -p adding_pages <span class="string">&quot;ページの追加&quot;</span></span><br><span class="line"></span><br><span class="line">※https://[owner名].github.io/yyyy/MM/dd/adding_pages/index.html に静的HTMLが追加される</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                    
+                    <!-- Tags Bottom -->
+                    
+
+                    <!-- Comments -->
+                    
+
+
+
+                </div>
+                <div class="fl w-100 w-30-l center fw3 lh-copy pl4-ns tl black-50">
+                    
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 1: About -->
+                    <div class="mt5 mt0-l">
+    <article class="dt db-l mw8 mw8-m mw5-ns center ml0-l bg-white mv3">
+        <div class="dn dtc-m db-l v-mid tc pr4 pr0-l" style="min-width: 6rem;">
+            <img src="/images/spring-wallpaper.jpg" class="mb4-l br-100 h3 w3 h4-l w4-l dib" title="ha3uno">
         </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
+        <div class="dtc db-l v-mid lh-copy measure center f6 black-50 tj">
+            A software developer. Tokyo/Java/Spring/AWS/Gradle
         </div>
-    </div>
-</a>
-            
-                <a href="/2020/08/08/adding_images/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2020-08-08</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">画像の追加<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-                <a href="/2020/08/08/making_of_this_site/">
-    <div class="dt w-100 hover-border-main-color pointer pa3 border-color bl mv4">
-        <div class="dtc v-mid w-90 black-70">
-            <div>
-                
-                    <span class="f5 fw3 lh-copy pr4">2020-08-08</span> 
-                
-                
-            </div>
-            <span class="f3 fw3 lh-copy">このサイトの作り方<span>
-        </div>
-        <div class="dtc v-mid w-10 f1 black-50 tr">
-            <i class="fa fa-file-text-o"></i>
-        </div>
-    </div>
-</a>
-            
-        </div>
-    </div>
+    </article>
+</div>
+
+                    <hr class="dn-l mw4 black-50 mt5" />
+                    
+                    <!-- Widget 2: Categories -->
+                    
+
+                    <!-- Widget 3: Recent Posts -->
+                    <div class="mt5 tc tl-l">
+    <h3>最近の投稿</h3>
     
+        <p>
+            <a href="/2020/08/08/adding_pages/">ページの追加</a>
+        </p>
+    
+        <p>
+            <a href="/2020/08/08/adding_images/">画像の追加</a>
+        </p>
+    
+        <p>
+            <a href="/2020/08/08/making_of_this_site/">このサイトの作り方</a>
+        </p>
+    
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
