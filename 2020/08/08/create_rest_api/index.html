@@ -20,7 +20,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Open APIでRest API作成しがち"/>
+        <meta property="og:title" content="Open APIでRest APIのソースコードとAPI定義書を自動生成"/>
     
 
     <!--Open Graph Description-->
@@ -44,7 +44,7 @@
 
     <!-- Title -->
     
-    <title>Open APIでRest API作成しがち - ha3uno - Github pages</title>
+    <title>Open APIでRest APIのソースコードとAPI定義書を自動生成 - ha3uno - Github pages</title>
 
     <!-- Tachyons Core CSS -->
     <link rel="stylesheet" href="https://unpkg.com/tachyons/css/tachyons.min.css">
@@ -120,7 +120,7 @@
     <!-- Title -->
     <div class="w-100 mw8 center vh-40 dt">
         <div class="dtc v-mid white">
-            <h1 class="f1-l f2-m tc tc-m tl-ns">Open APIでRest API作成しがち</h1>
+            <h1 class="f1-l f2-m tc tc-m tl-ns">Open APIでRest APIのソースコードとAPI定義書を自動生成</h1>
             <p class="f4 fw3 pab-100px tc tc-m tl-ns">2020-08-08</p>
         </div>
     </div>
@@ -151,7 +151,7 @@
 <li>Open APIはRest APIを作成する上で何かと便利<ul>
 <li>Rest APIをYAML形式で簡単に定義できる</li>
 <li>定義したYAMLファイルからRest APIのソースコードを生成できる</li>
-<li>YAMLファイルはツールを使えば静的HTMLとして生成できる-&gt;API定義書を作成できる</li>
+<li>定義したYAMLファイルからはAPI定義書(静的HTML)も生成できる</li>
 </ul>
 </li>
 </ul>
@@ -160,17 +160,61 @@
 <li>言語： Java (Spring)</li>
 </ul>
 <h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><ul>
-<li><p>ペットショップ<a target="_blank" rel="noopener" href="https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/petstore.yaml">https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/petstore.yaml</a> のYAMLをベースに</p>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/OAI/OpenAPI-Specification/blob/master/examples/v3.0/petstore.yaml">OpenAPIのgithubのサンプル(ペットショップ)</a> をベースにRest APIを作成する</p>
 </li>
-<li><p>Spring initializerで落としてきて</p>
+<li><p><a target="_blank" rel="noopener" href="https://start.spring.io/">Spring Initializer</a>からSpring Bootアプリの雛形をダウンロード</p>
+<ul>
+<li>下記の通り設定を変更(指定なしはデフォルトのまま)<ul>
+<li>Project: Gradle projectを指定(好み)</li>
+<li>Project Metadata.Java: 8</li>
+<li>Dependencies: Spring web</li>
+</ul>
 </li>
-<li><p>gradleプラグインをセットする</p>
+<li>Generateをクリックし、ダウンロードしたzipファイルを解凍</li>
+</ul>
 </li>
-<li><p>細かいところをセット</p>
+<li><p>解凍したサンプルアプリを編集</p>
+<ul>
+<li><p>プロジェクトのルートディレクトリにpetstore.yamlを追加</p>
+</li>
+<li><p>build.gradleを編集</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">plugins &#123;</span><br><span class="line">  ︙</span><br><span class="line">  <span class="comment">// プラグイン追加(OpenAPI Generator Gradle Plugin)</span></span><br><span class="line">  id <span class="string">&quot;org.openapi.generator&quot;</span> version <span class="string">&quot;4.3.1&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">︙</span><br><span class="line"><span class="comment">// プラグインの設定を追加</span></span><br><span class="line">openApiGenerate &#123;</span><br><span class="line">    generatorName = <span class="string">&quot;spring&quot;</span></span><br><span class="line">    inputSpec = <span class="string">&quot;$rootDir/petstore.yaml&quot;</span>.toString()</span><br><span class="line">    outputDir = <span class="string">&quot;$rootDir&quot;</span>.toString()</span><br><span class="line">    apiPackage = <span class="string">&quot;com.example.demo.api&quot;</span></span><br><span class="line">    invokerPackage = <span class="string">&quot;com.example.demo.invoker&quot;</span></span><br><span class="line">    modelPackage = <span class="string">&quot;com.example.demo.model&quot;</span></span><br><span class="line">    configOptions = [</span><br><span class="line">      <span class="symbol">delegatePattern:</span> <span class="string">&quot;true&quot;</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>com.example.demo.DemoApplication.java を削除</p>
+</li>
+<li><p>.openapi-generator-ignoreというファイルをルートディレクトリに追加し、以下の内容を追記</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">README.md</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ソースコード生成</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew openApiGenerate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>build.gradleを編集し、生成したソースコードが依存するライブラリを追加</p>
+<ul>
+<li>プロジェクトのルートディレクトリにpom.xmlが生成されるので、それを参考に依存を追加</li>
+</ul>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">︙</span><br><span class="line">  dependencies &#123;</span><br><span class="line">      implementation <span class="string">&#x27;org.springframework.boot:spring-boot-starter-web:2.0.1.RELEASE&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;io.springfox:springfox-swagger2:2.8.0&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;io.springfox:springfox-swagger-ui:2.8.0&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;javax.xml.bind:jaxb-api:2.2.11&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.5&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;org.openapitools:jackson-databind-nullable:0.1.0&#x27;</span></span><br><span class="line">      implementation <span class="string">&#x27;javax.validation:validation-api:2.0.1.Final&#x27;</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>※以下のコマンドでpom.xmlはbuild.gradleに変換できる</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew init --<span class="built_in">type</span> pom</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>アプリを実行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./gradlew bootRun</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ブラウザからアプリにアクセスし、Rest APIが叩けることを確認する</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080</a></li>
+<li>swagger-uiからペットショップのRest APIを叩いてみる(レスポンスステータスとして501 Not Implemented が返ってくる)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><p>API定義書を生成できる</p>
-</li>
-<li><p>ソースコードも生成できる</p>
+<ul>
+<li>TODO</li>
+</ul>
 </li>
 </ul>
 
@@ -214,7 +258,7 @@
     <h3>Recent Posts</h3>
     
         <p>
-            <a href="/2020/08/08/create_rest_api/">Open APIでRest API作成しがち</a>
+            <a href="/2020/08/08/create_rest_api/">Open APIでRest APIのソースコードとAPI定義書を自動生成</a>
         </p>
     
         <p>
