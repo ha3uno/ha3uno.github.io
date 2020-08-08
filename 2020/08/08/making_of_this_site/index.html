@@ -148,11 +148,34 @@
 
                     <!-- Main Post Content -->
                     <h2 id="要約"><a href="#要約" class="headerlink" title="要約"></a>要約</h2><ul>
-<li>だいたい<a target="_blank" rel="noopener" href="https://dotstud.io/blog/hexo-static-site-vol1/">ここ</a>をベースに作成</li>
-<li>途中GithubのSSH認証のため<a target="_blank" rel="noopener" href="https://qiita.com/shizuma/items/2b2f873a0034839e47ce">ここ</a>を参考に鍵をセット</li>
+<li>だいたい<a target="_blank" rel="noopener" href="https://dotstud.io/blog/hexo-static-site-vol1/">ここ</a>をベースに作成<ul>
+<li>Github Pagesを使用しブログをホスティング</li>
+<li>静的サイトジェネレータはHexoを使用<ul>
 <li>HexoのThemeは<a target="_blank" rel="noopener" href="https://github.com/klugjo/hexo-theme-anodyne">これ</a>をベースにちょっと改造</li>
+<li>Theme自体は300種類くらい存在する(<a target="_blank" rel="noopener" href="https://hexo.io/themes/">ここ</a>を参照。デモもある)</li>
 </ul>
-<h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 記事追加(/ha3uno_blog/source/_posts/[記事名].md でmarkdownが作成される)</span></span><br><span class="line">hexo new [記事名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># デプロイ</span></span><br><span class="line">hexo deploy -g</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li>途中GithubのSSH認証のため<a target="_blank" rel="noopener" href="https://qiita.com/shizuma/items/2b2f873a0034839e47ce">ここ</a>を参考に鍵をセット(いつもお世話になるやつ)</li>
+</ul>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><ul>
+<li>Nodeがインストールされていること</li>
+<li>著者の環境はWindows 10</li>
+</ul>
+<h2 id="手順"><a href="#手順" class="headerlink" title="手順"></a>手順</h2>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Githubにログインし、自分のowner名.github.ioのリポジトリを作成</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Hexoをグローバルインストール</span></span><br><span class="line">npm install -g hexo</span><br><span class="line"></span><br><span class="line"><span class="comment"># ブログの雛形作成</span></span><br><span class="line">hexo init [blog_name]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ライブラリをインストール</span></span><br><span class="line"><span class="built_in">cd</span> [blog_name]</span><br><span class="line">npm install</span><br><span class="line"></span><br><span class="line"><span class="comment"># ローカル環境で起動(http://localhost:4000 でサーバが起動)</span></span><br><span class="line">hexo server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 記事追加(/blog_name/source/_posts/[記事名].md でmarkdownが作成される)</span></span><br><span class="line">hexo new [記事名]</span><br><span class="line"></span><br><span class="line"><span class="comment"># デプロイ用のライブラリをインストール</span></span><br><span class="line">npm install hexo-deployer-git --save</span><br><span class="line"></span><br><span class="line"><span class="comment"># デプロイ用の設定を_config.ymlに追加(#Site, #URL, #Deployment等)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># デプロイ</span></span><br><span class="line">hexo deploy -g</span><br><span class="line"></span><br><span class="line">デプロイされると、https://[自分のowner名].github.io にページが公開される</span><br></pre></td></tr></table></figure>
+
+<h2 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h2><ul>
+<li>Hexoのベースの設定は_config.ymlを編集<ul>
+<li>Themeごとの設定はthemes/[theme_name]/_config.yml を編集</li>
+<li>Anodyneの場合、色の変更は/anodyne/source/css/style.styl を編集する</li>
+</ul>
+</li>
+<li>hexo deploy -gでGithub Pagesに静的HTMLでサイトを公開できるが、MarkdownのソースコードはリポジトリにはPushされない<ul>
+<li>別で管理する必要がある</li>
+</ul>
+</li>
+</ul>
 
                     
                     <!-- Tags Bottom -->
@@ -188,18 +211,6 @@
                     <!-- Widget 3: Recent Posts -->
                     <div class="mt5 tc tl-l">
     <h3>最近の投稿</h3>
-    
-        <p>
-            <a href="/2020/08/08/tesuto/">tesuto</a>
-        </p>
-    
-        <p>
-            <a href="/2020/08/08/fuga/">fuga</a>
-        </p>
-    
-        <p>
-            <a href="/2020/08/08/hoge/">hoge</a>
-        </p>
     
         <p>
             <a href="/2020/08/08/making_of_this_site/">このサイトの作り方</a>
