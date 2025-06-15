@@ -152,7 +152,92 @@
                     
 
                     <!-- Main Post Content -->
-                    
+                    <p>流行りのClaude codeを試してみた所感</p>
+<br>
+
+<p>やったこと</p>
+<ul>
+<li>サンプルのECサイトを構築<ul>
+<li><a target="_blank" rel="noopener" href="https://omiseyasan.onrender.com/">https://omiseyasan.onrender.com/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ha3uno/omiseyasan">https://github.com/ha3uno/omiseyasan</a><ul>
+<li>コード部分は9割以上claudeの生成物であり、手を加えていない</li>
+</ul>
+</li>
+<li>商品の閲覧、カート追加、アカウント登録、注文、注文履歴参照機能を持つ</li>
+<li>管理機能としてサイトの更新履歴登録、閲覧機能も</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<p>事前準備</p>
+<ul>
+<li>geminiを使えるようにする</li>
+<li>claudeのproプラン(20ドル)契約</li>
+<li>vs codeでclaudeを使えるように</li>
+</ul>
+<br>
+
+<p>how-to</p>
+<ul>
+<li>geminiにサンプルのecサイトを構築できるやり方を聞く<ul>
+<li>Renderというサービスで無料でwebアプリを構築できることを知る</li>
+<li>技術スタックはfrontはreact, backはgoでテキトーに</li>
+<li>単一リポジトリで、go側でfrontのhtmlとかもホスティングさせる形に</li>
+</ul>
+</li>
+<li>renderでアカウントを作成し、blueprintでアプリを、あとはdbでpostgresqlのdbを手でポチポチ構築<ul>
+<li>renderはgitのリポジトリと連携させ、リポジトリの指定ブランチにpushされたらrender.ymlでci/cdさせるように</li>
+</ul>
+</li>
+<li>geminiにclaudeに対する命令文を生成させつつ、ecサイトの基本的な機能を構築<ul>
+<li>命令した内容は下記参照<ul>
+<li><a target="_blank" rel="noopener" href="https://omiseyasan.onrender.com/update-history">https://omiseyasan.onrender.com/update-history</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<p>所要時間</p>
+<ul>
+<li>約8時間程度(基本的なガワ作成だけであれば3時間半でOK)</li>
+</ul>
+<br>
+
+<p>良かった点</p>
+<ol>
+<li>短時間でサイト構築できた<ul>
+<li>非エンジニアがモックをつくるのによさそう</li>
+</ul>
+</li>
+<li>リファクタとかはかなりいい感じにやってくれた(main.goの分解作業)</li>
+<li>わからんがデザインとかもなんとなく最低限わかるような形で作ってくれた</li>
+<li>(goだからか)生成されるコードもわりと秩序があった</li>
+</ol>
+<br>
+
+<p>つらみ</p>
+<ul>
+<li>claudeへの命令は連打するとtokenが溶けて制限到達して数時間利用不可になる</li>
+<li>手元のボロpc(intelチップのmac)だとつらい</li>
+<li>最初の機能のガワ追加はいいが、エラー出て動かないあたりからgeminiがアホになって頼れなくなる<ul>
+<li>途中からclaudeに直接命令するスタイルに変更</li>
+</ul>
+</li>
+<li>途中から生成物がエラーが動かなくなっていった(命令文にテスト実行も含ませるようにしたら解決)</li>
+<li>db疎通、ciのエラー、環境構築まわりなどトラシュー系は人の手が必要<ul>
+<li>仕組みができてればコード追加はラクにやってくれそう</li>
+</ul>
+</li>
+<li>このブログが見づらい(白っぽい背景に白文字…claudeでなんとかしたい)</li>
+</ul>
+<br>
+
+<p>その他メモ(本ブログ記事の投稿手順)</p>
+<p>⁠<code>⁠git clone https://github.com/ha3uno/blog_source.git  &lt;br&gt;  # ライブラリをインストール  npm install  &lt;br&gt;  # Hexoをグローバルインストール  npm install -g hexo  &lt;br&gt;  # ローカルで起動  hexo server  &lt;br&gt;  # 記事追加(/ha3uno_blog/source/_posts/[記事名].md が作成される)  hexo new post -p try_claude_code.md &quot;タイトル&quot;  &lt;br&gt;  # デプロイ用のライブラリをインストール  npm install hexo-deployer-git --save  &lt;br&gt;  # マークダウンを編集してpush  &lt;br&gt;  # Github Pagesにデプロイ  hexo deploy -g  </code></p>
+
                     
                     <!-- Tags Bottom -->
                     
